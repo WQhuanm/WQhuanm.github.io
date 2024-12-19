@@ -1,4 +1,4 @@
-base_url = "https://wqhuanm.github.io/"
+base_url = "https://WQhuanm.github.io/"
 generate_feeds = true
 feed_filenames = ["rss.xml"]
 theme = "even"
@@ -11,4 +11,5 @@ even_title = "WQhuanm's Blog"
 even_menu = [
     {url = "$BASE_URL", name = "Home"},
     {url = "$BASE_URL/tags/top/", name = "Top"},
+    {url = "$BASE_URL/issue-282/", name = "About"},
 ]
