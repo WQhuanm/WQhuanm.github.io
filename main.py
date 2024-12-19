@@ -8,10 +8,7 @@ from github import Github
 from lxml.etree import CDATA
 from marko.ext.gfm import gfm as marko
 
-MD_HEAD = 
-"""
-## [WQhuanm's Blog](https://wqhuanm.github.io)
-"""
+MD_HEAD = """## [WQhuanm's Blog](https://wqhuanm.github.io)"""
 
 BACKUP_DIR = "BACKUP"
 ANCHOR_NUMBER = 5
