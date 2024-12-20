@@ -47,7 +47,7 @@ jobs:
           gh release download $ZOLA_VERSION --repo getzola/zola -p '*linux*' --output zola.tar.gz
           tar zxf zola.tar.gz && mv zola /usr/local/bin
           git clone https://github.com/charlesrocket/halve-z /usr/local/bin/themes/halve-z
-          ls /usr/local/bin/themes
+          ls 
           cp -R -f /usr/local/bin/themes/halve-z/content/ /usr/local/bin/content/
           cp config.toml output/config.toml
           cd output && zola build --base-url $BASE_URL
