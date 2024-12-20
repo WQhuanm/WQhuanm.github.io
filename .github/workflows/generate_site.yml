@@ -32,6 +32,8 @@ jobs:
         run: |
           curl -sL https://github.com/getzola/zola/releases/download/v${ZOLA_VERSION}/zola-v${ZOLA_VERSION}-x86_64-unknown-linux-gnu.tar.gz | tar xz -C /usr/local/bin
           git clone https://github.com/charlesrocket/halve-z themes/halve-z
+          ls
+          echo echo $PWD
           ls themes/halve-z
       - name: Checkout
         uses: actions/checkout@v3
