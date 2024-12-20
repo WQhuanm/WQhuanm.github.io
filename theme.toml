@@ -1,0 +1,106 @@
+name = "halve-z"
+description = "Retro two-column theme"
+license = "MIT"
+homepage = "https://github.com/charlesrocket/halvez"
+min_version = "0.18.0"
+demo = "https://halve-z.netlify.app/"
+
+[extra]
+locale = "en_US"
+logo = "fireball.gif"
+manifest = ""
+read_time = false
+toc = true
+csp = false
+
+[extra.placeholders]
+tags = false
+subtitle = false
+
+[extra.home]
+title = "Halve-Z"
+subtitle = "Zola theme"
+glitch = false
+logo = { enabled = true, height = "100", width = "100" }
+footer = true
+
+[extra.images]
+home = ""
+post_list = ""
+default_post = ""
+categories = []
+
+[extra.menu]
+posts = false
+posts_label = "Posts"
+links = [
+    #{ name = "Code", url = "/projects/" },
+]
+
+[extra.footer]
+enabled = true
+author = true
+copyright = true
+hash = false
+stack = true
+links = [
+    #{ name = "posts", url = "/posts/" },
+]
+
+[extra.social]
+#email = ""
+#mastodon = ""
+#twitter = ""
+#facebook = ""
+#dribbble = ""
+#codepen = ""
+#steam = ""
+#soundcloud = ""
+#google_plus = ""
+#youtube = ""
+#tumblr = ""
+#pinterest = ""
+#foursquare = ""
+#xing = ""
+#weibo = ""
+#codeberg = ""
+#github = ""
+#gitlab = ""
+#bitbucket = ""
+#stackoverflow = ""
+#linkedin = ""
+#instagram = ""
+#lastfm = ""
+#reddit = ""
+#twitch = ""
+#flickr = ""
+#keybase = ""
+#hackernews = ""
+
+[extra.comments]
+system = ""
+
+[extra.comments.cactus]
+site = ""
+page_size = 10
+guest_posting = true
+update_interval = 0
+
+[extra.comments.giscus]
+repo = ""
+repo_id = ""
+category = ""
+category_id = ""
+mapping = ""
+strict = "1"
+reactions = "0"
+lang = "en"
+
+[author]
+name = "-k"
+homepage = "https://failsafe.monster/"
+
+[original]
+author =  "Taylan Tatlı"
+homepage = "https://tatli.me/"
+repo = "https://github.com/TaylanTatli/Halve"
