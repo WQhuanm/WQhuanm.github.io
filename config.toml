@@ -5,6 +5,12 @@ default_language = "en"
 author = "charlesrocket"
 #theme = "halve-z"
 
+even_menu = [
+    {url = "$BASE_URL", name = "Home"},
+    {url = "$BASE_URL/tags/top/", name = "Top"},
+    {url = "$BASE_URL/issue-282/", name = "About"},
+]
+
 compile_sass = true
 minify_html = true
 generate_feeds = true
