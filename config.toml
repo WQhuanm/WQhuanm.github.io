@@ -1,6 +1,7 @@
 base_url = "https://WQhuanm.github.io/" #根路径# The URL the site will be built for
 compile_sass = false
-
+generate_feeds = true
+feed_filenames = ["rss.xml"]
 # Whether to build a search index to be used later on by a JavaScript library
 build_search_index = false
 
@@ -8,6 +9,10 @@ build_search_index = false
 title = "Zola Grayscale"
 description = "A port of the Start Bootrap Grayscale theme, for Zola."
 author = "Your Website"
+taxonomies = [
+    {name = "categories", feed = true},
+    {name = "tags", feed = true},
+]
 
 [markdown]
 # Whether to do syntax highlighting
