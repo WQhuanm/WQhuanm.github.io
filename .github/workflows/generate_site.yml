@@ -38,6 +38,7 @@ jobs:
           submodules: recursive
       - name: Build with Zola
         run: |
+          ls themes/anatole-zola
           cp -R -f themes/anatole-zola/content/about content/
           cp -R -f themes/anatole-zola/content/archive content/
           cp -R -f themes/anatole-zola/content/_index.md content/
