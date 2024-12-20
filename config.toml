@@ -1,5 +1,4 @@
-base_url = "https://WQhuanm.github.io/"
-# Whether to automatically compile all Sass files in the sass directory
+base_url = "https://WQhuanm.github.io/" #根路径# The URL the site will be built for
 compile_sass = false
 
 # Whether to build a search index to be used later on by a JavaScript library
