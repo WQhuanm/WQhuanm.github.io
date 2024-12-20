@@ -48,7 +48,7 @@ jobs:
           tar zxf zola.tar.gz && mv zola /usr/local/bin
           git clone https://github.com/charlesrocket/halve-z /usr/local/bin/themes/halve-z
           ls /usr/local/bin/themes
-          cp -R -f themes/halve-z/content/ content/
+          cp -R -f /usr/local/bin/themes/halve-z/content/ /usr/local/bin/content/
           cp config.toml output/config.toml
           cd output && zola build --base-url $BASE_URL
       - name: Setup Pages
