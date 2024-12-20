@@ -1,15 +1,28 @@
 base_url = "https://WQhuanm.github.io/"
-generate_feeds = true
-feed_filenames = ["rss.xml"]
-theme = "even"
-taxonomies = [
-    {name = "categories", feed = true},
-    {name = "tags", feed = true},
-]
+# Whether to automatically compile all Sass files in the sass directory
+compile_sass = false
+
+# Whether to build a search index to be used later on by a JavaScript library
+build_search_index = false
+
+# The site title and description; used in feeds by default.
+title = "Zola Grayscale"
+description = "A port of the Start Bootrap Grayscale theme, for Zola."
+author = "Your Website"
+
+[markdown]
+# Whether to do syntax highlighting
+# Theme can be customised by setting the `highlight_theme` variable to a theme supported by Zola
+highlight_code = true
+highlight_theme = "gray-matter-dark"
+
 [extra]
-even_title = "WQhuanm's Blog"
-even_menu = [
-    {url = "$BASE_URL", name = "Home"},
-    {url = "$BASE_URL/tags/top/", name = "Top"},
-    {url = "$BASE_URL/issue-282/", name = "About"},
-]
+# enable a debug pop out panel to display template context
+debug = false
+
+# google analytics id
+#google_analytics_tag = "XXXXXX"
+
+# SB Forms API token
+# comment this out to remove the contact form
+sb_forms_api_token = "API_TOKEN"
