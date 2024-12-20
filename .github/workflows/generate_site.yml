@@ -31,8 +31,9 @@ jobs:
       - name: Install Zola
         run: |
           echo $PWD
+          ls
           curl -sL https://github.com/getzola/zola/releases/download/v${ZOLA_VERSION}/zola-v${ZOLA_VERSION}-x86_64-unknown-linux-gnu.tar.gz | tar xz -C /usr/local/bin
-          git clone https://github.com/longfangsong/anatole-zola.git ./themes/anatole-zola
+          git clone https://github.com/longfangsong/anatole-zola.git themes/anatole-zola
           echo $PWD
           ls
       - name: Checkout
