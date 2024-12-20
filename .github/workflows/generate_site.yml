@@ -49,7 +49,7 @@
             git clone https://github.com/charlesrocket/halve-z output/themes/halve-z
             ls output/content
             echo $PWD 
-            cp -R -f output/themes/halve-z/content/ output/content/
+            cp -R -f output/themes/halve-z/content/* output/content/
             cp config.toml output/config.toml
             ls output/content
             cd output && zola build --base-url $BASE_URL
