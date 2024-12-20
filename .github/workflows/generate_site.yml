@@ -46,9 +46,9 @@ jobs:
           isite generate --user $USER --repo $REPO
           gh release download $ZOLA_VERSION --repo getzola/zola -p '*linux*' --output zola.tar.gz
           tar zxf zola.tar.gz && mv zola /usr/local/bin
-          git clone https://github.com/charlesrocket/halve-z /usr/local/bin/themes/halve-z
-          ls 
-          cp -R -f /usr/local/bin/themes/halve-z/content/ /usr/local/bin/content/
+          git clone https://github.com/charlesrocket/halve-z ./output/themes/halve-z
+          ls ./output
+          cp -R -f ./output/themes/halve-z/content/ ./output/content/
           cp config.toml output/config.toml
           cd output && zola build --base-url $BASE_URL
       - name: Setup Pages
