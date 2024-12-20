@@ -1,4 +1,4 @@
-name: Deploy static content to Pages
+name: Deploy static content to GitPages
 
 on:
   issues:
@@ -30,30 +30,49 @@ jobs:
     env:
       GH_TOKEN: ${{ github.token }}
       ISITE_VERSION: v0.1.3
-      ZOLA_VERSION: v0.19.2
       USER: ${{ github.repository_owner }}
       REPO: ${{ github.event.repository.name }}
-      # BASE_URL: https://blog.yihong0618.me # change to your own domain
-      # Change to below if you are using GitHub Pages
-      BASE_URL: https://${{ github.repository_owner }}.github.io
+      BASE_URL: https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}
+
     steps:
-      - name: Checkout
+      - name: Checkout repository
         uses: actions/checkout@v4
-      - name: Generate markdown
+
+      - name: Install Node.js and Hexo
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+
+      - name: Install Hexo and Dependencies
         run: |
+          npm install hexo-cli -g
+          npm install
+          git clone --depth 1 https://github.com/Fechin/hexo-theme-diaspora.git themes/diaspora
+
+      - name: Download blog content with isite
+        run: |
+          # 使用 isite 下载博客内容到 output 目录
           gh release download $ISITE_VERSION --repo kemingy/isite -p '*Linux_x86_64*' --output isite.tar.gz
           tar zxf isite.tar.gz && mv isite /usr/local/bin
           isite generate --user $USER --repo $REPO
-          gh release download $ZOLA_VERSION --repo getzola/zola -p '*linux*' --output zola.tar.gz
-          tar zxf zola.tar.gz && mv zola /usr/local/bin
-          cp config.toml output/config.toml
-          cd output && zola build --base-url $BASE_URL
+          
+          # 将下载的内容移动到 Hexo 需要的目录（例如 source/_posts）
+          cp -r output/* ./source/
+
+      - name: Generate Hexo site
+        run: |
+          hexo init . # 初始化 Hexo
+          hexo generate # 生成静态文件
+          
       - name: Setup Pages
         uses: actions/configure-pages@v4
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v2
         with:
-          path: 'output/public'
+          path: 'public'
+
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v3
+
