@@ -45,6 +45,7 @@ jobs:
           gh release download $ISITE_VERSION --repo kemingy/isite -p '*Linux_x86_64*' --output isite.tar.gz
           tar zxf isite.tar.gz && mv isite /usr/local/bin
           ls
+          echo $PWD
           isite generate --user $USER --repo $REPO
           ls output
           echo $PWD
