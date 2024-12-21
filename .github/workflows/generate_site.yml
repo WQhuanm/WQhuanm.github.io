@@ -53,7 +53,7 @@ jobs:
         run: |
           npm install -g hexo-cli
           npm create kira-hexo@latest output
-          cd output && sudo rm -d node_modules
+          cd output && sudo rm -rf node_modules
           npm install
           hexo clean && hexo generate 
       - name: Setup Pages
