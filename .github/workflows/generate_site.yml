@@ -68,7 +68,9 @@ jobs:
           echo "这样"
           ls output/public
           echo "这样"
-          ls output/action
+          ls 
+          echo "这样"
+          ls action
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v3
