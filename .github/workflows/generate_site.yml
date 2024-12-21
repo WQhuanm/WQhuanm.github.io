@@ -49,8 +49,6 @@ jobs:
           key: ${{ runner.OS }}-npm-cache
           restore-keys: |
             ${{ runner.OS }}-npm-cache
-      - name: Install Dependencies
-        run: npm install
       - name: Generate markdown
         run: |
           npm install -g hexo-cli
