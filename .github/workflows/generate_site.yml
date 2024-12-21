@@ -59,9 +59,16 @@ jobs:
       - name: Setup Pages
         uses: actions/configure-pages@v4
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
+        uses: actions/upload-pages-artifact@v2
         with:
           path: 'output/public'
+      - name: check action
+        run: |
+          ls output
+          echo "这样"
+          ls output/public
+          echo "这样"
+          ls output/action
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v3
