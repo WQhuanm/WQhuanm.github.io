@@ -44,9 +44,10 @@ jobs:
           
           gh release download $ISITE_VERSION --repo kemingy/isite -p '*Linux_x86_64*' --output isite.tar.gz
           tar zxf isite.tar.gz && mv isite /usr/local/bin
+          ls
+          isite generate --user $USER --repo $REPO
           ls output
           echo $PWD
-          isite generate --user $USER --repo $REPO
           gh release download $ZOLA_VERSION --repo getzola/zola -p '*linux*' --output zola.tar.gz
           tar zxf zola.tar.gz && mv zola /usr/local/bin
 
