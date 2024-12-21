@@ -168,7 +168,7 @@ def save_issue(issue, me, dir_name=BACKUP_DIR):
         if issue.labels:
             f.write("categories: \n")
             for label in issue.labels:
-                f.write(f"    - {label}\n")
+                f.write(f"    - {label.name}\n")
         f.write("---\n\n")
         f.write(issue.body or "")
         # if issue.comments:
