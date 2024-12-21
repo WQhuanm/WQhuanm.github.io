@@ -22,43 +22,41 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  # Build job
-  build:
-    runs-on: ubuntu-latest
-    env:
-      ZOLA_VERSION: 0.16.0
-    steps:
-      - name: Install Zola
-        run: |
-          echo $PWD
-          ls
-          curl -sL https://github.com/getzola/zola/releases/download/v${ZOLA_VERSION}/zola-v${ZOLA_VERSION}-x86_64-unknown-linux-gnu.tar.gz | tar xz -C /usr/local/bin
-      - name: Checkout
-        uses: actions/checkout@v3
-        with:
-          submodules: recursive
-      - name: Build with Zola
-        run: |
-          git clone https://github.com/longfangsong/anatole-zola.git themes/anatole-zola
-          echo $PWD
-          ls
-          cp -R -f themes/anatole-zola/content/about content/
-          cp -R -f themes/anatole-zola/content/archive content/
-          cp -R -f themes/anatole-zola/content/_index.md content/
-          zola build
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v1
-        with:
-          path: ./public
-
-  # Deployment job
   deploy:
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
-    needs: build
+    env:
+      GH_TOKEN: ${{ github.token }}
+      ISITE_VERSION: v0.1.3
+      ZOLA_VERSION: v0.19.2
+      USER: ${{ github.repository_owner }}
+      REPO: ${{ github.event.repository.name }}
+      BASE_URL: https://blog.yihong0618.me # change to your own domain
+      # Change to below if you are using GitHub Pages
+      # BASE_URL: https://${{ github.repository_owner }}.github.io
     steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Generate markdown
+        run: |
+          gh release download $ISITE_VERSION --repo kemingy/isite -p '*Linux_x86_64*' --output isite.tar.gz
+          tar zxf isite.tar.gz && mv isite /usr/local/bin
+          isite generate --user $USER --repo $REPO
+          gh release download $ZOLA_VERSION --repo getzola/zola -p '*linux*' --output zola.tar.gz
+          tar zxf zola.tar.gz && mv zola /usr/local/bin
+          ls /usr/local/bin
+          echo $PWD
+          cp config.toml output/config.toml
+          cd output && zola build --base-url $BASE_URL
+          ls
+      - name: Setup Pages
+        uses: actions/configure-pages@v4
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v2
+        with:
+          path: 'output/public'
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v1
+        uses: actions/deploy-pages@v3
