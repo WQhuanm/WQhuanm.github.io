@@ -1,5 +1,4 @@
-name: Deploy static content to Pages
-
+name: Deploy static content to GitPages
 on:
   issues:
     types:
@@ -10,20 +9,19 @@ on:
       - labeled
       - unlabeled
   workflow_dispatch:
-
 # Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
 permissions:
   contents: read
   pages: write
   id-token: write
-
 concurrency:
   group: ${{ github.workflow }}
   cancel-in-progress: true
 
 jobs:
   deploy:
-    environment:
+    steps:
+      environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
@@ -33,31 +31,38 @@ jobs:
       ZOLA_VERSION: v0.19.2
       USER: ${{ github.repository_owner }}
       REPO: ${{ github.event.repository.name }}
-     # BASE_URL: https://blog.yihong0618.me # change to your own domain
+      # BASE_URL: https://blog.yihong0618.me # change to your own domain
       # Change to below if you are using GitHub Pages
-      BASE_URL: https://${{ github.repository_owner }}.github.io
+      BASE_URL: https://${{ github.repository_owner }}.github.io/
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+      - name: Use Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          # Examples: 20, 18.19, >=16.20.2, lts/Iron, lts/Hydrogen, *, latest, current, node
+          # Ref: https://github.com/actions/setup-node#supported-version-syntax
+          node-version: "20"
+      - name: Cache NPM dependencies
+        uses: actions/cache@v4
+        with:
+          path: node_modules
+          key: ${{ runner.OS }}-npm-cache
+          restore-keys: |
+            ${{ runner.OS }}-npm-cache
+      - name: Install Dependencies
+        run: npm install
       - name: Generate markdown
         run: |
-          
-          gh release download $ISITE_VERSION --repo kemingy/isite -p '*Linux_x86_64*' --output isite.tar.gz
-          tar zxf isite.tar.gz && mv isite /usr/local/bin
-          ls
-          echo $PWD
-          isite generate --user $USER --repo $REPO
-          ls output
-          echo $PWD
-          gh release download $ZOLA_VERSION --repo getzola/zola -p '*linux*' --output zola.tar.gz
-          tar zxf zola.tar.gz && mv zola /usr/local/bin
-
-          cp config.toml output/config.toml
-          cd output && zola build --base-url $BASE_URL
+          npm install -g hexo-cli
+          npm create kira-hexo@latest output
+          cd output && rm -f node_modules
+          npm install
+          hexo clean && hexo generate 
       - name: Setup Pages
         uses: actions/configure-pages@v4
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v2
+        uses: actions/upload-pages-artifact@v3
         with:
           path: 'output/public'
       - name: Deploy to GitHub Pages
