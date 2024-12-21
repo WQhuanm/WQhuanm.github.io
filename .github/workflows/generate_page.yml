@@ -51,6 +51,7 @@ jobs:
           npm create kira-hexo@latest output
           cd output && sudo rm -rf node_modules
           npm install
+          cp ../Blog/* /source/_posts/
           hexo clean && hexo generate 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
